@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      env: nginx-app  # Matches Pods that have the label 'env=dev'
+  template:
+    metadata:
+      labels:
+        env: dev
+        tier: frontend
+    spec:
+      containers:
+        - image: nginx
+          name: frontend-container
