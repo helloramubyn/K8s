@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: i28-nginx-app
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+     app: i28-nginx-app
+template:
+  metadata:
+    labels:
+        app: i28-nginx-app
+    spec:
+      containers:
+      - name: container-1
+        image: devopswithcloudhub/nginx:blue
+   
+  
