@@ -1,0 +1,36 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: faster
+provisioner: pd.csi.storage.gke.io
+parameters:
+  type: pd-ssd
+
+---
+# creating a pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: helpdesk-logs-pvc
+spec:
+  storageClassName: faster
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+     storage: 20Gi  
+
+
+# creating a pvc for lms
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lms-logs-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+     storage: 15Gi  
+
