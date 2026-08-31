@@ -1,0 +1,39 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{},"name":"faster"},"parameters":{"type":"pd-ssd"},"provisioner":"pd.csi.storage.gke.io"}
+  creationTimestamp: "2026-08-30T01:30:41Z"
+  name: faster
+  resourceVersion: "1788053441637423014"
+  uid: d2c6ca36-941c-4a26-9e43-ceb10ca1aadd
+parameters:
+  type: pd-ssd
+provisioner: pd.csi.storage.gke.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+
+------------
+
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    components.gke.io/component-name: pdcsi
+    components.gke.io/component-version: 1.35.46
+    components.gke.io/layer: addon
+    storageclass.kubernetes.io/is-default-class: "true"
+  creationTimestamp: "2026-08-26T17:41:48Z"
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+    k8s-app: gcp-compute-persistent-disk-csi-driver
+  name: standard-rwo
+  resourceVersion: "1787766108039535007"
+  uid: 7a4820d6-737e-403a-96de-6e5f98632b53
+parameters:
+  type: pd-balanced
+provisioner: pd.csi.storage.gke.io
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
