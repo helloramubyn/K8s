@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helpdesk-app
+  name: lms-app
 spec:
  replicas: 1
  selector:
@@ -13,13 +13,13 @@ spec:
         app: busybox
     spec:
      volumes:
-     - name: my-volume
+     - name: my-volume-lms
        persistentVolumeClaim:
-        claimName: helpdesk-logs-pvc
+        claimName: lms-logs-pvc
      containers:
       - name: busybox
         image: busybox      
         command: ["/bin/sh", "-c", "while true; do sleep 3600; done"]
         volumeMounts:
-        - name: my-volume
-          mountPath: "/helpdesk"
+        - name: my-volume-lms
+          mountPath: "/lms"
