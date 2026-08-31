@@ -1,0 +1,26 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sc-filestore-rws
+provisioner: filestore.csi.storage.gke.io
+parameters:
+  tier: basic_hdd
+  network: default
+allowVolumeExpansion: true
+volumeBindingMode: Immediate
+
+---
+
+#-- creating PVC
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-filestore-rwx
+spec:
+  storageClassName: sc-filestore-rws
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+     storage: 1Ti
